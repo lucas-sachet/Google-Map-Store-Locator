@@ -13,10 +13,42 @@ body {
     font-weight: bold;
     font-family: sans-serif;
     color: aliceblue;
-    
+
     position: absolute;
     z-index: 10;
     top: 100px;
     right: 100px;
-    
 }
+
+.search-container {
+    width: 400px;
+    height: 60px;
+    background-color: #fff;
+
+    position: absolute;
+    z-index: 10;
+    right: 100px;
+    top: 230px;
+    border-radius: 30px;
+}
+
+.search {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.search i {
+    font-size: 25px;
+}
+
+#zip-code {
+    flex-grow: 1;
+    font-size: 25px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
