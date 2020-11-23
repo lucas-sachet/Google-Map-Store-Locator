@@ -52,3 +52,14 @@ body {
     outline: none;
 }
 
+.stores-list-container {
+    position: absolute;
+    width: 400px;
+    border-radius: 30px;
+    background-color: whitesmoke;
+    top: 320px;
+    bottom: 30px;
+    right: 100px;
+    z-index: 10;
+}
+
