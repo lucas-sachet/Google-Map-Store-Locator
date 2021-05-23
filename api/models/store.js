@@ -5,7 +5,7 @@ const storeSchema = mongoose.Schema({
   phoneNumber: String,
   address: {},
   openStatusText: String,
-  adressLines: Array,
+  addressLines: Array,
   location: {
     type: {
       type: String,

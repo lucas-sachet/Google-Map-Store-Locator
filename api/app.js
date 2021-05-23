@@ -1,11 +1,13 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const Store = require('./models/store')
+require('dotenv').config();
+
 const app = express()
 const port = 3000
-const Store = require('./models/store')
 
 
-mongoose.connect('mongodb+srv://lucassachet:T62anmRtpPZx8r2@cluster0.ofbqy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
+mongoose.connect(process.env.CONNECT_MONGOOSE, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
@@ -23,9 +25,9 @@ app.post('/api/stores', (req,res) => {
     dbStores.push({
       storeName: store.name,
       phoneNumber: store.phoneNumber,
-      adress: store.adress,
+      address: store.address,
       openStatusText: store.openStatusText,
-      adressLines: store.adressLines,
+      addressLines: store.addressLines,
       location: {
         type: 'Point',
         coordinates: [
