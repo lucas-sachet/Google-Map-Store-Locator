@@ -2,6 +2,7 @@
 
 var map;
 var infoWindow;
+var markers = [];
 
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
@@ -25,6 +26,17 @@ const getStores = () => {
   }).then((data) => {
     searchLocationsNear(data);
     setStoresList(data);
+    setOnClickListener()
+  })
+}
+
+const setOnClickListener = () => {
+  let storeElements = document.querySelectorAll('.store-container');
+
+  storeElements.forEach((elem, index) => {
+    elem.addEventListener('click', () => {
+      google.maps.event.trigger(markers[index + 1], 'click')
+    })  
   })
 }
 
@@ -109,4 +121,6 @@ const createMarker = (latlng, name, address, openStatusText, phone, storeNumber)
     infoWindow.setContent(html)
     infoWindow.open(map, marker)
   })
+
+  markers.push(marker);
 }
