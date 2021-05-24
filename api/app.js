@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const axios = require('axios')
 const Store = require('./models/store')
 require('dotenv').config();
 
@@ -9,7 +10,8 @@ const port = 3000
 
 mongoose.connect(process.env.CONNECT_MONGOOSE, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useCreateIndex: true
 });
 
 app.use(function (req, res, next) {
@@ -48,12 +50,41 @@ app.post('/api/stores', (req,res) => {
 } )
 
 app.get('/api/stores', (req, res) => {
-  Store.find({}, (err, stores) => {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      res.status(200).send(stores);
+  const zipCode = req.query.zip_code;
+
+  const googleMapsURL = "https://maps.googleapis.com/maps/api/geocode/json"
+  axios.get(googleMapsURL, {
+    params: {
+      address: zipCode,
+      key: process.env.GOOGLE_API_KEY
     }
+  }).then((response) => {
+    const data = response.data;
+    const coordinates = [
+      data.results[0].geometry.location.lng,
+      data.results[0].geometry.location.lat,
+    ]
+
+    Store.find({
+      location: {
+        $near: {
+          $maxDistance: 3218,
+          $geometry: {
+            type: "Point",
+            coordinates: coordinates
+          }
+        }
+      }
+    }, (err, stores) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.status(200).send(stores);
+      }
+    })
+
+  }).catch((error) => {
+    console.log(error);
   })
 })
 
