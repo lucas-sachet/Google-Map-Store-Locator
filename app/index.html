@@ -14,19 +14,22 @@
             <div class="search-container">
                 <span class="title">Store Locator</span>
                 <div class="search">
-                    <i class="fas fa-search" onclick="getStores(event)"></i>
-                    <input type="text" onkeydown="onEnter()" id="zip-code" placeholder="Enter zip">
+                    <input type="text" onkeydown="onEnter(event)" id="zip-code" placeholder="Find a store">
+                    <i class="fas fa-search" onclick="getStores()"></i>
                 </div>
                 <div class="stores-list-container">
                     <div class="stores-list">
-                        
+                        <div class="intro">
+                            <span class="enter-zip">Enter zip code</span>
+                            <span class="find-stores">Find stores near you!</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
      
         <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBY0fgj6kpM_IcbadHSQX65RlGSI4hU7gc&callback=initMap"
+        src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"
         defer
         ></script>   
         <script src="js/index.js" async defer></script>

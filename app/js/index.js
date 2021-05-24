@@ -34,10 +34,15 @@ const getStores = () => {
       throw new Error(response.status);
     }
   }).then((data) => {
-    clearLocations();
-    searchLocationsNear(data);
-    setStoresList(data);
-    setOnClickListener()
+    if(data.length > 0) {
+      clearLocations();
+      searchLocationsNear(data);
+      setStoresList(data);
+      setOnClickListener()
+    } else {
+      clearLocations();
+      noStoresFound();
+    }
   })
 }
 
@@ -47,6 +52,15 @@ const clearLocations = () => {
     markers[i].setMap(null);
   }
   markers.length = 0;
+}
+
+const noStoresFound = () => {
+  const html = `
+    <div class="no-stores-found">
+      No Stores found!
+    </div>
+  `
+  document.querySelector('.stores-list').innerHTML = html;
 }
 
 const setOnClickListener = () => {

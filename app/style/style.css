@@ -20,14 +20,17 @@ body {
 
 .title {
     padding: 12px 12px;
-    font-size: 25px;
+    font-size: 50px;
     color: rgba(0, 0, 0, .87);
     text-transform: uppercase;
     font-weight: bold;
     font-family: sans-serif;
+    background-color: rgba(255,255,255,0.2);
+    border-radius: 40px;
 
-    display: flex;
-    justify-content: center;
+    position: fixed;
+    left: 200px;
+    top: 100px;
 }
 
 .search-container {
@@ -41,17 +44,22 @@ body {
     display: flex;
 
     padding-right: 20px;
-    margin: 10px 10px;
+    margin: 20px 15px;
     border-bottom: 1px solid rgba(0,0,0,.5);
 }
 
 .search i {
-    margin-right: 16px;
+    cursor: pointer;
     font-size: 25px;
     color: rgba(0,0,0,.5);
 
     display: flex;
-    align-items: center
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.search i:hover {
+    color: rgba(0, 0, 0, .87);
 }
 
 #zip-code {
@@ -64,7 +72,7 @@ body {
 
 .stores-list-container {
     display: flex;
-    height: 85vh;
+    height: 90vh;
     width: 100%;
 
     padding-bottom: 8px;
@@ -179,4 +187,33 @@ body {
 
 .store-container-background:hover {
     background-color: #cccccc87;
+}
+
+.intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+}
+
+.enter-zip {
+    color: #514C4C;
+    font-size: 22px;
+}
+
+.find-stores {
+    color: #1985A1;
+    font-size: 20px;
+}
+
+.no-stores-found {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+    color: #514C4C;
+    font-size: 20px;
 }
