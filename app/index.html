@@ -14,8 +14,8 @@
             <div class="search-container">
                 <span class="title">Store Locator</span>
                 <div class="search">
-                    <i class="fas fa-search"></i>
-                    <input type="text" id="zip-code" placeholder="Enter zip">
+                    <i class="fas fa-search" onclick="getStores(event)"></i>
+                    <input type="text" onkeydown="onEnter()" id="zip-code" placeholder="Enter zip">
                 </div>
                 <div class="stores-list-container">
                     <div class="stores-list">

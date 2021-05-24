@@ -10,13 +10,23 @@ function initMap() {
     zoom: 14,
   });
   infoWindow = new google.maps.InfoWindow();
-  getStores();
   createMarker();
 }
 
+const onEnter = (e) => {
+  if(e.key == "Enter") {
+    getStores();
+  }
+}
+
 const getStores = () => {
+  const zipCode = document.getElementById('zip-code').value;
+  if(!zipCode) {
+    return;
+  }
   const API_URL = 'http://localhost:3000/api/stores';
-  fetch(API_URL)
+  const FULL_URL = `${API_URL}?zip_code=${zipCode}`
+  fetch(FULL_URL)
   .then((response) => {
     if(response.status == 200) {
       return response.json();
@@ -24,10 +34,19 @@ const getStores = () => {
       throw new Error(response.status);
     }
   }).then((data) => {
+    clearLocations();
     searchLocationsNear(data);
     setStoresList(data);
     setOnClickListener()
   })
+}
+
+const clearLocations = () => {
+  infoWindow.close();
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(null);
+  }
+  markers.length = 0;
 }
 
 const setOnClickListener = () => {
